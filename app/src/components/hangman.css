@@ -1,0 +1,12 @@
+.headCount {
+    background-color: red;
+  }
+  
+  .headCountAlive {
+    background-color: #ccc;
+  }
+  
+  .winner {
+    color: green;
+  }
+  
