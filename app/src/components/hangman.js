@@ -191,6 +191,7 @@ export default function Hangman() {
 
   return (
     <div>
+        <div><img src="./img/hangman3.png" alt="hangman image"/><img src="./img/hangman4.png" alt="hangman image"/></div>
       {isCustomActive ? (
         <form type="submit">
           <input
