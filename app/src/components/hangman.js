@@ -4,7 +4,6 @@ import getRandomWord from "./randomWord";
 import "./hangman.css";
 
 export default function Hangman() {
-  // a state with an array of objects with a letter and a bool value. for alphabet buttons
   const alphabetBtns = [
     {
       letter: "a",
@@ -148,7 +147,7 @@ export default function Hangman() {
   };
 
   const handleRandomWord = async () => {
-    const randomWord = await getRandomWord(5);
+    const randomWord = await getRandomWord(4);
     setHangmanWord(randomWord);
     let arrWithLetters = [];
     for (let i = 0; i < randomWord.length; i++) {
@@ -191,7 +190,7 @@ export default function Hangman() {
 
   return (
     <div>
-        <div><img src="./img/hangman3.png" alt="hangman image"/><img src="./img/hangman4.png" alt="hangman image"/></div>
+        <div><img src="./img/hangman1.png" alt="hangman1 image"/><img src="./img/hangman2.png" alt="hangman2 image"/></div>
       {isCustomActive ? (
         <form type="submit">
           <input
