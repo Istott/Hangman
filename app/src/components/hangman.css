@@ -9,4 +9,20 @@
   .winner {
     color: green;
   }
+
+.alphabetBtns {
+  background-color: RGB(241, 211, 151);
+  border: none;
+  padding: 2%;
+  margin: 0 4px;
+  border-radius: 4px 4px 4px 0px;
+  font-weight: bold;
+
+}
+
+.alphabetBtns:hover {
+  filter: brightness(90%);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: bolder;
+}
   

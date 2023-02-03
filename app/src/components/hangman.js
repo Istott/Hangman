@@ -190,7 +190,7 @@ export default function Hangman() {
 
   return (
     <div>
-        <div><img src="./img/hangman1.png" alt="hangman1 image"/><img src="./img/hangman2.png" alt="hangman2 image"/></div>
+        <div><img src="./img/hangman1.png" alt="hangman1"/><img src="./img/hangman2.png" alt="hangman2"/></div>
       {isCustomActive ? (
         <form type="submit">
           <input
@@ -222,6 +222,7 @@ export default function Hangman() {
         {letters.map((letter) => {
           return (
             <button
+            className="alphabetBtns"
               key={letter.letter}
               disabled={letter.isGuessed}
               onClick={() => handleGuessLetter(letter.letter)}
