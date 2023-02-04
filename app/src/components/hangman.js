@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import getRandomWord from "./randomWord";
+import getDialogue from "./dialogue";
 
 import "./hangman.css";
 
@@ -118,6 +119,18 @@ export default function Hangman() {
   const [customWord, setCustomWord] = useState("");
   const [countToDie, setCountToDie] = useState(0);
   const [winningCount, setWinningCount] = useState(null);
+  const [isVisible, setIsVisible] =  useState(false);
+  const [dialogue, setDialogue] = useState('');
+  const [width, setWidth] = useState('100%');
+  console.log(width);
+
+  useEffect(() => {
+    if (winningCount === hangmanWord.length) setDialogue(getDialogue('escape'));
+
+    setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
+  }, [letters]);
 
   const handleCustomWord = () => {
     setHangmanWord(customWord);
@@ -135,6 +148,7 @@ export default function Hangman() {
     setWinningCount(null);
     setCustomWord("");
     setIsCustomActive(false);
+    setWidth('100%');
   };
 
   const handleGuessWord = () => {
@@ -142,6 +156,7 @@ export default function Hangman() {
       setWinningCount(hangmanWord.length);
     } else {
       setCountToDie(6);
+      setWidth('0%');
     }
     setIsGuessActive(false);
   };
@@ -163,7 +178,17 @@ export default function Hangman() {
     setWinningCount(null);
     setCustomWord("");
     setIsCustomActive(false);
+    setWidth('100%');
   };
+
+  const calcWidth = () => {
+    if (countToDie === 5) return '0%';
+    const num = Number(width.slice(0, -1));
+    const secretSauce = 100/6;
+    const str = Math.ceil(num - secretSauce);
+    console.log(str);
+    return str + '%';
+  }
 
   const handleGuessLetter = (letter) => {
     const newLetterArr = letters.map((ltr) => {
@@ -183,14 +208,24 @@ export default function Hangman() {
       });
       setWinningCount((count) => count + wordArr);
       setHangmanLetters(updatedHangmanBools);
+      setDialogue(getDialogue('right'));
     } else {
       setCountToDie((count) => count + 1);
+      setWidth(calcWidth());
+      setDialogue(getDialogue('wrong'));
     }
+    setIsVisible(true);
   };
 
   return (
     <div>
-        <div><img src="./img/hangman1.png" alt="hangman1"/><img src="./img/hangman2.png" alt="hangman2"/></div>
+        <div>
+            <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : (`clip${countToDie}` +  ' hangmanPosition')} src="./img/hangman1.png" alt="hangman1"/>
+            {winningCount != hangmanWord.length
+                ? <div className={isVisible ? "dialogueBox show" : "dialogueBox"}><p>{dialogue}</p></div>
+                : <div className={winningCount === hangmanWord.length ? "dialogueBoxEscaped show" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
+            }
+        </div>
       {isCustomActive ? (
         <form type="submit">
           <input
@@ -213,11 +248,7 @@ export default function Hangman() {
         random word
       </button>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly"
-        }}
+        className="btnBox"
       >
         {letters.map((letter) => {
           return (
@@ -232,14 +263,16 @@ export default function Hangman() {
           );
         })}
       </div>
-      <div
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "space-around",
           margin: "10px 0"
         }}
-      >
-        <p
+      > */}
+      <div className="healthBar">
+        <div className="currentHealth" style={{width}}>health</div>
+        {/* <p
           className={countToDie >= 1 ? "headCount" : ""}
           style={{
             display: "flex",
@@ -304,7 +337,7 @@ export default function Hangman() {
           }}
         >
           RIGHT LEG
-        </p>
+        </p> */}
       </div>
 
       <div

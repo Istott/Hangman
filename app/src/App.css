@@ -1,7 +1,7 @@
 .App {
-  margin-top: 50vh;
+  margin: 25vh 20vw;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
 }
 

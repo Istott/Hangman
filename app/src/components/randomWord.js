@@ -11,7 +11,7 @@ const getRandomWord = async (num) => {
   export default getRandomWord;
 
   
-  const commonWords = [
+  export const commonWords = [
     "apple",
     "beach",
     "table",

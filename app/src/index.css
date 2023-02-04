@@ -13,12 +13,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(../public/img/boardandrope.png) no-repeat center center fixed; 
+  background: url(../public/img/boardandropeandnoose.png) no-repeat center center fixed; 
   /* -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover; */
   background-size: contain;
   background-color: RGB(105, 180, 202);
+  position: relative;
 }
 
 code {
