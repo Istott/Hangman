@@ -15,7 +15,7 @@ const rightGuess = [
     'yes, do more of that',
     `hurry, running out of time`,
     'lucky guess',
-
+    'yay, not as bad as I thought',
 ];
 
 const escaped = [
@@ -23,7 +23,8 @@ const escaped = [
     'I thought I was a gonner',
     'mighty fine of ya',
     `congrats, you don't suck`,
-    
+    'deepest graditude',
+    'I got away with murder, Yay!'
 ];
 
 const handleRandomDialogue = (arr) => {
