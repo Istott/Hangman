@@ -122,11 +122,12 @@ export default function Hangman() {
   const [isVisible, setIsVisible] =  useState(false);
   const [dialogue, setDialogue] = useState('');
   const [width, setWidth] = useState('100%');
-  console.log(width);
 
   useEffect(() => {
     if (winningCount === hangmanWord.length) setDialogue(getDialogue('escape'));
+  }, [winningCount, hangmanWord.length ])
 
+  useEffect(() => {
     setTimeout(() => {
         setIsVisible(false);
       }, 3000);
@@ -186,7 +187,6 @@ export default function Hangman() {
     const num = Number(width.slice(0, -1));
     const secretSauce = 100/6;
     const str = Math.ceil(num - secretSauce);
-    console.log(str);
     return str + '%';
   }
 
@@ -220,8 +220,8 @@ export default function Hangman() {
   return (
     <div>
         <div>
-            <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : (`clip${countToDie}` +  ' hangmanPosition')} src="./img/hangman1.png" alt="hangman1"/>
-            {winningCount != hangmanWord.length
+            <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src="./img/hangman1.png" alt="hangman1"/>
+            {winningCount !== hangmanWord.length
                 ? <div className={isVisible ? "dialogueBox show" : "dialogueBox"}><p>{dialogue}</p></div>
                 : <div className={winningCount === hangmanWord.length ? "dialogueBoxEscaped show" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
             }
