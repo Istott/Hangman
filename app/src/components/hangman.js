@@ -263,81 +263,8 @@ export default function Hangman() {
           );
         })}
       </div>
-      {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          margin: "10px 0"
-        }}
-      > */}
       <div className="healthBar">
         <div className="currentHealth" style={{width}}>health</div>
-        {/* <p
-          className={countToDie >= 1 ? "headCount" : ""}
-          style={{
-            display: "flex",
-            border: "1px black solid",
-            margin: "0 10px",
-            padding: "5px"
-          }}
-        >
-          HEAD
-        </p>
-        <p
-          className={countToDie >= 2 ? "headCount" : ""}
-          style={{
-            display: "flex",
-            border: "1px black solid",
-            margin: "0 10px",
-            padding: "5px"
-          }}
-        >
-          BODY
-        </p>
-        <p
-          className={countToDie >= 3 ? "headCount" : ""}
-          style={{
-            display: "flex",
-            border: "1px black solid",
-            margin: "0 10px",
-            padding: "5px"
-          }}
-        >
-          LEFT ARM
-        </p>
-        <p
-          className={countToDie >= 4 ? "headCount" : ""}
-          style={{
-            display: "flex",
-            border: "1px black solid",
-            margin: "0 10px",
-            padding: "5px"
-          }}
-        >
-          RIGHT ARM
-        </p>
-        <p
-          className={countToDie >= 5 ? "headCount" : ""}
-          style={{
-            display: "flex",
-            border: "1px black solid",
-            margin: "0 10px",
-            padding: "5px"
-          }}
-        >
-          LEFT LEG
-        </p>
-        <p
-          className={countToDie >= 6 ? "headCount" : ""}
-          style={{
-            display: "flex",
-            border: "1px black solid",
-            margin: "0 10px",
-            padding: "5px"
-          }}
-        >
-          RIGHT LEG
-        </p> */}
       </div>
 
       <div
@@ -348,7 +275,7 @@ export default function Hangman() {
         }}
       >
         {!hangmanWord ? (
-          <p>Create a custom word to get started</p>
+          <p>Create a custom word or do a random word to get started</p>
         ) : (
           hangmanLetters.map((letter) => {
             if (letter.letter === " ")
