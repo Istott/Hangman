@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getRandomWord from "./randomWord";
-import getDialogue from "./dialogue";
+import getRandom from "./getRandom";
 
 import "./hangman.css";
 
@@ -122,9 +122,10 @@ export default function Hangman() {
   const [isVisible, setIsVisible] =  useState(false);
   const [dialogue, setDialogue] = useState('');
   const [width, setWidth] = useState('100%');
+  const [hangmanCharacter, setHangmanCharacter] = useState('');
 
   useEffect(() => {
-    if (winningCount === hangmanWord.length) setDialogue(getDialogue('escape'));
+    if (winningCount === hangmanWord.length) setDialogue(getRandom("escaped"));
   }, [winningCount, hangmanWord.length ])
 
   useEffect(() => {
@@ -150,6 +151,7 @@ export default function Hangman() {
     setCustomWord("");
     setIsCustomActive(false);
     setWidth('100%');
+    setHangmanCharacter(getRandom("hangmanCharacters"));
   };
 
   const handleGuessWord = () => {
@@ -180,6 +182,7 @@ export default function Hangman() {
     setCustomWord("");
     setIsCustomActive(false);
     setWidth('100%');
+    setHangmanCharacter(getRandom("hangmanCharacters"));
   };
 
   const calcWidth = () => {
@@ -208,11 +211,11 @@ export default function Hangman() {
       });
       setWinningCount((count) => count + wordArr);
       setHangmanLetters(updatedHangmanBools);
-      setDialogue(getDialogue('right'));
+      setDialogue(getRandom('rightGuess'));
     } else {
       setCountToDie((count) => count + 1);
       setWidth(calcWidth());
-      setDialogue(getDialogue('wrong'));
+      setDialogue(getRandom('wrongGuess'));
     }
     setIsVisible(true);
   };
@@ -220,7 +223,7 @@ export default function Hangman() {
   return (
     <div>
         <div>
-            <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src="./img/hangman1.png" alt="hangman1"/>
+            <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src={hangmanCharacter} alt="hangman"/>
             {winningCount !== hangmanWord.length
                 ? <div className={isVisible ? "dialogueBox show" : "dialogueBox"}><p>{dialogue}</p></div>
                 : <div className={winningCount === hangmanWord.length ? "dialogueBoxEscaped show" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
@@ -264,7 +267,7 @@ export default function Hangman() {
         })}
       </div>
       <div className="healthBar">{countToDie === 6 ? 'dead' : ''}
-        <div className="currentHealth" style={{width}}>{countToDie !== 6 ? `health ${width}` : ''}</div>
+        <div className="currentHealth" style={{width}}>{countToDie !== 6 ? width : ''}</div>
       </div>
 
       <div
