@@ -1,3 +1,7 @@
+.headCountAlive {
+  background-color: #ccc;
+}
+
 .winner {
   color: green;
 }

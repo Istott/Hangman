@@ -263,8 +263,8 @@ export default function Hangman() {
           );
         })}
       </div>
-      <div className="healthBar">
-        <div className="currentHealth" style={{width}}>health</div>
+      <div className="healthBar">{countToDie === 6 ? 'dead' : ''}
+        <div className="currentHealth" style={{width}}>{countToDie !== 6 ? `health ${width}` : ''}</div>
       </div>
 
       <div
@@ -282,7 +282,7 @@ export default function Hangman() {
               return (
                 <div
                   key={letter.id}
-                  className={countToDie >= 6 ? "headCount" : ""}
+                  className={countToDie >= 6 ? "" : "winner"}
                   style={{
                     borderBottom: "1px black solid",
                     minWidth: "50px",
@@ -294,7 +294,7 @@ export default function Hangman() {
             return (
               <div
                 key={letter.id}
-                className={countToDie >= 6 ? "headCount" : "headCountAlive"}
+                className={countToDie >= 6 ? "" : "headCountAlive"}
                 style={{
                   border: "1px black solid",
                   minWidth: "50px",
@@ -337,7 +337,7 @@ export default function Hangman() {
       )}
 
       {countToDie === 6 && (
-        <h2 className={"headCount"}>
+        <h2 className={"clip6"}>
           You lost ma Dude! GAME OVER the word was {hangmanWord}
         </h2>
       )}
