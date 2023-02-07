@@ -126,7 +126,7 @@ export default function Hangman() {
 
   useEffect(() => {
     if (winningCount === hangmanWord.length) setDialogue(getRandom("escaped"));
-  }, [winningCount, hangmanWord.length ])
+  }, [winningCount, hangmanWord.length])
 
   useEffect(() => {
     setTimeout(() => {
@@ -134,39 +134,8 @@ export default function Hangman() {
       }, 3000);
   }, [letters]);
 
-  const handleCustomWord = () => {
-    setHangmanWord(customWord?.toLowerCase());
-    let arrWithLetters = [];
-    for (let i = 0; i < customWord.length; i++) {
-      arrWithLetters.push({
-        id: Math.floor(Math.random() * 999999),
-        letter: customWord[i]?.toLowerCase(),
-        isGuessed: false
-      });
-    }
-    setHangmanLetters(arrWithLetters);
-    setLetters(alphabetBtns);
-    setCountToDie(0);
-    setWinningCount(null);
-    setCustomWord("");
-    setIsCustomActive(false);
-    setWidth('100%');
-    setHangmanCharacter(getRandom("hangmanCharacters"));
-  };
-
-  const handleGuessWord = () => {
-    if (customWord === hangmanWord) {
-      setWinningCount(hangmanWord.length);
-    } else {
-      setCountToDie(6);
-      setWidth('0%');
-    }
-    setIsGuessActive(false);
-    setCustomWord('');
-  };
-
-  const handleRandomWord = async () => {
-    const randomWord = await getRandomWord(4);
+  const handleHangmanWord = async (word) => {
+    const randomWord = await word;
     setHangmanWord(randomWord);
     let arrWithLetters = [];
     for (let i = 0; i < randomWord.length; i++) {
@@ -184,6 +153,17 @@ export default function Hangman() {
     setIsCustomActive(false);
     setWidth('100%');
     setHangmanCharacter(getRandom("hangmanCharacters"));
+  }
+
+  const handleGuessWord = () => {
+    if (customWord === hangmanWord) {
+      setWinningCount(hangmanWord.length);
+    } else {
+      setCountToDie(6);
+      setWidth('0%');
+    }
+    setIsGuessActive(false);
+    setCustomWord('');
   };
 
   const calcWidth = () => {
@@ -227,7 +207,7 @@ export default function Hangman() {
             <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src={hangmanCharacter} alt="hangman"/>
             {winningCount !== hangmanWord.length
                 ? <div className={isVisible ? "dialogueBox show" : "dialogueBox"}><p>{dialogue}</p></div>
-                : <div className={winningCount === hangmanWord.length ? "dialogueBoxEscaped show" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
+                : <div className={winningCount === hangmanWord.length ? isVisible ?  "dialogueBoxEscaped show" : "dialogueBoxEscaped" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
             }
         </div>
       {isCustomActive ? (
@@ -238,7 +218,7 @@ export default function Hangman() {
             value={customWord}
             onChange={(e) => setCustomWord(e.target.value)}
           ></input>
-          <button onClick={handleCustomWord}>save word</button>
+          <button  onClick={() => handleHangmanWord(customWord?.toLowerCase())}>save word</button>
         </form>
       ) : (
         <button
@@ -248,8 +228,11 @@ export default function Hangman() {
           custom word
         </button>
       )}
-      <button style={{ margin: "10px" }} onClick={handleRandomWord}>
+      <button style={{ margin: "10px" }} onClick={() => handleHangmanWord(getRandomWord(4))}>
         random word
+      </button>
+      <button style={{ margin: "10px" }} onClick={() => handleHangmanWord(getRandom("commonWords"))} >
+        common word
       </button>
       <div
         className="btnBox"
