@@ -135,12 +135,12 @@ export default function Hangman() {
   }, [letters]);
 
   const handleCustomWord = () => {
-    setHangmanWord(customWord);
+    setHangmanWord(customWord?.toLowerCase());
     let arrWithLetters = [];
     for (let i = 0; i < customWord.length; i++) {
       arrWithLetters.push({
         id: Math.floor(Math.random() * 999999),
-        letter: customWord[i],
+        letter: customWord[i]?.toLowerCase(),
         isGuessed: false
       });
     }
@@ -162,6 +162,7 @@ export default function Hangman() {
       setWidth('0%');
     }
     setIsGuessActive(false);
+    setCustomWord('');
   };
 
   const handleRandomWord = async () => {

@@ -5,7 +5,8 @@ const randomArray = {
         'mighty fine of ya',
         `congrats, you don't suck`,
         'deepest graditude',
-        'I got away with murder, Yay!'
+        'I got away with murder, Yay!',
+        'ride easy partner'
     ],
     "wrongGuess": [
         `It's a good day to die`,
