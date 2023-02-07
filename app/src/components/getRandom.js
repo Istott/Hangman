@@ -70,6 +70,7 @@ const randomArray = {
         "earth",
         "flower",
         "friend",
+        "grape",
         "green",
         "heart",
         "house",
@@ -137,7 +138,9 @@ const randomArray = {
         "woman",
         "world",
         "write",
+        "xray",
         "yellow",
+        "zebra",
     ],
 }
 
