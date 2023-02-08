@@ -202,7 +202,7 @@ export default function Hangman() {
   };
 
   return (
-    <div>
+    <div className="container">
         <div>
             <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src={hangmanCharacter} alt="hangman"/>
             {winningCount !== hangmanWord.length
@@ -210,6 +210,7 @@ export default function Hangman() {
                 : <div className={winningCount === hangmanWord.length ? isVisible ?  "dialogueBoxEscaped show" : "dialogueBoxEscaped" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
             }
         </div>
+        <div>
       {isCustomActive ? (
         <form type="submit">
           <input
@@ -331,6 +332,7 @@ export default function Hangman() {
       {winningCount === hangmanWord.length && (
         <h2 style={{ color: "green" }}>You won ma dude!</h2>
       )}
+      </div>
     </div>
   );
 }

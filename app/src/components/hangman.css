@@ -1,3 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  border: 1px red solid;
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
 .headCountAlive {
   background-color: #ccc;
 }
@@ -65,7 +75,7 @@
 	}
 }
 
-.hangmanPosition {
+/* .hangmanPosition {
   position: absolute;
   top: 190px;
   left: 1095px;
@@ -75,7 +85,7 @@
   position:absolute;
   top: 290px;
   left: 1300px;
-}
+} */
 
 .dialogueBox {
   background-color: #ccc;

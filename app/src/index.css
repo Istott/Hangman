@@ -19,7 +19,6 @@ body {
   -o-background-size: contain;
   background-size: contain;
   background-color: RGB(105, 180, 202);
-  position: relative;
 }
 
 code {
