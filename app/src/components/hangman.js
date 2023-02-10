@@ -203,14 +203,15 @@ export default function Hangman() {
 
   return (
     <div className="container">
-        <div>
+        <div className="bob">
+          {/* <img className="gallow" src="./img/boardandropeandnoose3.png" alt="noose"/> */}
             <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src={hangmanCharacter} alt="hangman"/>
             {winningCount !== hangmanWord.length
                 ? <div className={isVisible ? "dialogueBox show" : "dialogueBox"}><p>{dialogue}</p></div>
                 : <div className={winningCount === hangmanWord.length ? isVisible ?  "dialogueBoxEscaped show" : "dialogueBoxEscaped" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
             }
         </div>
-        <div>
+        <div className="controls">
       {isCustomActive ? (
         <form type="submit">
           <input

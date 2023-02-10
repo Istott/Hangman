@@ -1,6 +1,21 @@
 .App {
-  margin: 25vh 20vw;
   display: flex;
   justify-content: flex-start;
   text-align: center;
+  /* max-height: 100vh; */
+  min-height: 100vh;
+  /* height: 100%; */
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+  /* border: 1px purple solid; */
+
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: url(../public/img/boardandropeandnoose3.png) no-repeat top center; 
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain; */
+  /* position: relative; */
 }
