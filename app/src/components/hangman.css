@@ -4,7 +4,7 @@
     justify-content: space-between; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: url(../../public/img/boardandropeandnoose3.png) no-repeat top center; 
+    background: url(/img/boardandropeandnoose3.png) no-repeat top center; 
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
