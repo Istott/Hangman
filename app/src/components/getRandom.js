@@ -151,6 +151,3 @@ const getRandom = (obj) => {
 }
 
 export default getRandom;
-
-
-
