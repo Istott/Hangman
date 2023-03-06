@@ -121,7 +121,7 @@ export default function Hangman() {
   const [winningCount, setWinningCount] = useState(null);
   const [isVisible, setIsVisible] =  useState(false);
   const [dialogue, setDialogue] = useState('');
-  const [width, setWidth] = useState('100%');
+  const [health, setHealth] = useState('100%');
   const [hangmanCharacter, setHangmanCharacter] = useState('');
 
   useEffect(() => {
@@ -151,7 +151,7 @@ export default function Hangman() {
     setWinningCount(null);
     setCustomWord("");
     setIsCustomActive(false);
-    setWidth('100%');
+    setHealth('100%');
     setHangmanCharacter(getRandom("hangmanCharacters"));
   }
 
@@ -160,7 +160,7 @@ export default function Hangman() {
       setWinningCount(hangmanWord.length);
     } else {
       setCountToDie(6);
-      setWidth('0%');
+      setHealth('0%');
     }
     setIsGuessActive(false);
     setCustomWord('');
@@ -168,7 +168,7 @@ export default function Hangman() {
 
   const calcWidth = () => {
     if (countToDie === 5) return '0%';
-    const num = Number(width.slice(0, -1));
+    const num = Number(health.slice(0, -1));
     const secretSauce = 100/6;
     const str = Math.ceil(num - secretSauce);
     return str + '%';
@@ -195,7 +195,7 @@ export default function Hangman() {
       setDialogue(getRandom('rightGuess'));
     } else {
       setCountToDie((count) => count + 1);
-      setWidth(calcWidth());
+      setHealth(calcWidth());
       setDialogue(getRandom('wrongGuess'));
     }
     setIsVisible(true);
@@ -253,7 +253,7 @@ export default function Hangman() {
         })}
       </div>
       <div className="healthBar">{countToDie === 6 ? 'dead' : ''}
-        <div className="currentHealth" style={{width}}>{countToDie !== 6 ? width : ''}</div>
+        <div className="currentHealth" style={{width: health}}>{countToDie !== 6 ? health : ''}</div>
       </div>
 
       <div

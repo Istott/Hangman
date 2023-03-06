@@ -95,7 +95,7 @@
     left: 59%;
   }
   
-  /* .gallow {
+  .gallow {
     position: absolute;
     width: 1400px;
     height: 500px;
@@ -105,10 +105,9 @@
     right: 0;
     z-index: 0;
     border: 1px green solid;
-  } */
+  }
   
-  
-  /* .hangmanPosition {
+  .hangmanPosition {
     position: absolute;
     top: 45%;
     left: 57%;
@@ -118,7 +117,7 @@
     position:absolute;
     top: 50%;
     left: 70%;
-  } */
+  }
   
   .dialogueBox {
     background-color: #ccc;
