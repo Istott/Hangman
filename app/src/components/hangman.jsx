@@ -8,108 +8,108 @@ export default function Hangman() {
   const alphabetBtns = [
     {
       letter: "a",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "b",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "c",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "d",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "e",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "f",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "g",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "h",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "i",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "j",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "k",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "l",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "m",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "n",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "o",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "p",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "q",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "r",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "s",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "t",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "u",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "v",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "w",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "x",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "y",
-      isGuessed: false
+      isGuessed: false,
     },
     {
       letter: "z",
-      isGuessed: false
-    }
+      isGuessed: false,
+    },
   ];
   const [letters, setLetters] = useState(alphabetBtns);
   const [hangmanWord, setHangmanWord] = useState("");
@@ -119,19 +119,19 @@ export default function Hangman() {
   const [customWord, setCustomWord] = useState("");
   const [countToDie, setCountToDie] = useState(0);
   const [winningCount, setWinningCount] = useState(null);
-  const [isVisible, setIsVisible] =  useState(false);
-  const [dialogue, setDialogue] = useState('');
-  const [health, setHealth] = useState('100%');
-  const [hangmanCharacter, setHangmanCharacter] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const [dialogue, setDialogue] = useState("");
+  const [health, setHealth] = useState("100%");
+  const [hangmanCharacter, setHangmanCharacter] = useState("");
 
   useEffect(() => {
     if (winningCount === hangmanWord.length) setDialogue(getRandom("escaped"));
-  }, [winningCount, hangmanWord.length])
+  }, [winningCount, hangmanWord.length]);
 
   useEffect(() => {
     setTimeout(() => {
-        setIsVisible(false);
-      }, 3000);
+      setIsVisible(false);
+    }, 3000);
   }, [letters]);
 
   const handleHangmanWord = async (word) => {
@@ -142,7 +142,7 @@ export default function Hangman() {
       arrWithLetters.push({
         id: Math.floor(Math.random() * 999999),
         letter: randomWord[i],
-        isGuessed: false
+        isGuessed: false,
       });
     }
     setHangmanLetters(arrWithLetters);
@@ -151,28 +151,28 @@ export default function Hangman() {
     setWinningCount(null);
     setCustomWord("");
     setIsCustomActive(false);
-    setHealth('100%');
+    setHealth("100%");
     setHangmanCharacter(getRandom("hangmanCharacters"));
-  }
+  };
 
   const handleGuessWord = () => {
     if (customWord === hangmanWord) {
       setWinningCount(hangmanWord.length);
     } else {
       setCountToDie(6);
-      setHealth('0%');
+      setHealth("0%");
     }
     setIsGuessActive(false);
-    setCustomWord('');
+    setCustomWord("");
   };
 
   const calcWidth = () => {
-    if (countToDie === 5) return '0%';
+    if (countToDie === 5) return "0%";
     const num = Number(health.slice(0, -1));
-    const secretSauce = 100/6;
+    const secretSauce = 100 / 6;
     const str = Math.ceil(num - secretSauce);
-    return str + '%';
-  }
+    return str + "%";
+  };
 
   const handleGuessLetter = (letter) => {
     const newLetterArr = letters.map((ltr) => {
@@ -192,147 +192,173 @@ export default function Hangman() {
       });
       setWinningCount((count) => count + wordArr);
       setHangmanLetters(updatedHangmanBools);
-      setDialogue(getRandom('rightGuess'));
+      setDialogue(getRandom("rightGuess"));
     } else {
       setCountToDie((count) => count + 1);
       setHealth(calcWidth());
-      setDialogue(getRandom('wrongGuess'));
+      setDialogue(getRandom("wrongGuess"));
     }
     setIsVisible(true);
   };
 
   return (
     <div className="container">
-        <div className="bob">
-          {/* <img className="gallow" src="./img/boardandropeandnoose3.png" alt="noose"/> */}
-            <img className={winningCount === hangmanWord.length ? 'hangmanEscaped' : ''.concat(`clip${countToDie}`, ' hangmanPosition')} src={hangmanCharacter} alt="hangman"/>
-            {winningCount !== hangmanWord.length
-                ? <div className={isVisible ? "dialogueBox show" : "dialogueBox"}><p>{dialogue}</p></div>
-                : <div className={winningCount === hangmanWord.length ? isVisible ?  "dialogueBoxEscaped show" : "dialogueBoxEscaped" : "dialogueBoxEscaped"}><p>{dialogue}</p></div>
+      <div className="bob">
+        {/* <img className="gallow" src="./img/boardandropeandnoose3.png" alt="noose"/> */}
+        <img
+          className={
+            winningCount === hangmanWord.length
+              ? "hangmanEscaped"
+              : "".concat(`clip${countToDie}`, " hangmanPosition")
+          }
+          src={hangmanCharacter}
+          alt="hangman"
+        />
+        {winningCount !== hangmanWord.length ? (
+          <div className={isVisible ? "dialogueBox show" : "dialogueBox"}>
+            <p>{dialogue}</p>
+          </div>
+        ) : (
+          <div
+            className={
+              winningCount === hangmanWord.length
+                ? isVisible
+                  ? "dialogueBoxEscaped show"
+                  : "dialogueBoxEscaped"
+                : "dialogueBoxEscaped"
             }
-        </div>
-        <div className="controls">
-      {isCustomActive ? (
-        <form type="submit">
-          <input
-            type="text"
-            placeholder="type custom word"
-            value={customWord}
-            onChange={(e) => setCustomWord(e.target.value)}
-          ></input>
-          <button  onClick={() => handleHangmanWord(customWord?.toLowerCase())}>save word</button>
-        </form>
-      ) : (
+          >
+            <p>{dialogue}</p>
+          </div>
+        )}
+      </div>
+      <div className="controls">
+        {isCustomActive ? (
+          <form type="submit">
+            <input
+              type="text"
+              placeholder="type custom word"
+              value={customWord}
+              onChange={(e) => setCustomWord(e.target.value)}
+            ></input>
+            <button
+              onClick={() => handleHangmanWord(customWord?.toLowerCase())}
+            >
+              save word
+            </button>
+          </form>
+        ) : (
+          <button
+            style={{ margin: "10px" }}
+            onClick={() => setIsCustomActive(true)}
+          >
+            custom word
+          </button>
+        )}
         <button
           style={{ margin: "10px" }}
-          onClick={() => setIsCustomActive(true)}
+          onClick={() => handleHangmanWord(getRandomWord(4))}
         >
-          custom word
+          random word
         </button>
-      )}
-      <button style={{ margin: "10px" }} onClick={() => handleHangmanWord(getRandomWord(4))}>
-        random word
-      </button>
-      <button style={{ margin: "10px" }} onClick={() => handleHangmanWord(getRandom("commonWords"))} >
-        common word
-      </button>
-      <div
-        className="btnBox"
-      >
-        {letters.map((letter) => {
-          return (
-            <button
-            className="alphabetBtns"
-              key={letter.letter}
-              disabled={letter.isGuessed}
-              onClick={() => handleGuessLetter(letter.letter)}
-            >
-              {letter.letter}
-            </button>
-          );
-        })}
-      </div>
-      <div className="healthBar">{countToDie === 6 ? 'dead' : ''}
-        <div className="currentHealth" style={{width: health}}>{countToDie !== 6 ? health : ''}</div>
-      </div>
+        <button
+          style={{ margin: "10px" }}
+          onClick={() => handleHangmanWord(getRandom("commonWords"))}
+        >
+          common word
+        </button>
+        <div className="btnBox">
+          {letters.map((letter) => {
+            return (
+              <button
+                className="alphabetBtns"
+                key={letter.letter}
+                disabled={letter.isGuessed}
+                onClick={() => handleGuessLetter(letter.letter)}
+              >
+                {letter.letter}
+              </button>
+            );
+          })}
+        </div>
+        <div className="healthBar">
+          {countToDie === 6 ? "dead" : ""}
+          <div className="currentHealth" style={{ width: health }}>
+            {countToDie !== 6 ? health : ""}
+          </div>
+        </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly"
-        }}
-      >
-        {!hangmanWord ? (
-          <p>Create a custom word or do a random word to get started</p>
-        ) : (
-          hangmanLetters.map((letter) => {
-            if (letter.letter === " ")
+        <div className="hangmanWordContainer">
+          {!hangmanWord ? (
+            <p>Create a custom word or do a random word to get started</p>
+          ) : (
+            hangmanLetters.map((letter) => {
+              if (letter.letter === " ")
+                return (
+                  <div
+                    key={letter.id}
+                    className={countToDie >= 6 ? "" : "winner"}
+                    style={{
+                      borderBottom: "1px black solid",
+                      minWidth: "50px",
+                      minHeight: "50px",
+                      color: "black",
+                    }}
+                  ></div>
+                );
               return (
                 <div
                   key={letter.id}
-                  className={countToDie >= 6 ? "" : "winner"}
+                  className={countToDie >= 6 ? "" : "headCountAlive"}
                   style={{
-                    borderBottom: "1px black solid",
+                    border: "1px black solid",
                     minWidth: "50px",
                     minHeight: "50px",
-                    color: "black"
+                    color: "black",
                   }}
-                ></div>
-              );
-            return (
-              <div
-                key={letter.id}
-                className={countToDie >= 6 ? "" : "headCountAlive"}
-                style={{
-                  border: "1px black solid",
-                  minWidth: "50px",
-                  minHeight: "50px",
-                  color: "black"
-                }}
-              >
-                <p
-                  style={{ fontWeight: "bold" }}
-                  className={
-                    winningCount === hangmanWord.length ? "winner" : ""
-                  }
                 >
-                  {letter.isGuessed ? letter.letter : "_"}
-                </p>
-              </div>
-            );
-          })
-        )}
-      </div>
-      {isGuessActive ? (
-        <form type="submit">
-          <input
-            type="text"
-            placeholder="guess the word"
-            value={customWord}
-            onChange={(e) => setCustomWord(e.target.value)}
-          ></input>
-          <button style={{ margin: "10px" }} onClick={handleGuessWord}>
-            submit guess
+                  <p
+                    style={{ fontWeight: "bold" }}
+                    className={
+                      winningCount === hangmanWord.length ? "winner" : ""
+                    }
+                  >
+                    {letter.isGuessed ? letter.letter : "_"}
+                  </p>
+                </div>
+              );
+            })
+          )}
+        </div>
+        {isGuessActive ? (
+          <form type="submit">
+            <input
+              type="text"
+              placeholder="guess the word"
+              value={customWord}
+              onChange={(e) => setCustomWord(e.target.value)}
+            ></input>
+            <button style={{ margin: "10px" }} onClick={handleGuessWord}>
+              submit guess
+            </button>
+          </form>
+        ) : (
+          <button
+            style={{ margin: "10px" }}
+            onClick={() => setIsGuessActive(true)}
+          >
+            guess entire word
           </button>
-        </form>
-      ) : (
-        <button
-          style={{ margin: "10px" }}
-          onClick={() => setIsGuessActive(true)}
-        >
-          guess entire word
-        </button>
-      )}
+        )}
 
-      {countToDie === 6 && (
-        <h2 className={"clip6"}>
-          You lost ma Dude! GAME OVER the word was {hangmanWord}
-        </h2>
-      )}
-      {winningCount === hangmanWord.length && (
-        <h2 style={{ color: "green" }}>You won ma dude!</h2>
-      )}
+        {countToDie === 6 && (
+          <h2 className={"clip6"}>
+            You lost ma Dude! GAME OVER the word was {hangmanWord}
+          </h2>
+        )}
+        {winningCount === hangmanWord.length && (
+          <h2 style={{ color: "green" }}>You won ma dude!</h2>
+        )}
       </div>
     </div>
   );
