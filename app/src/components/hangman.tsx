@@ -134,7 +134,7 @@ export default function Hangman() {
     }, 3000);
   }, [letters]);
 
-  const handleHangmanWord = async (word) => {
+  const handleHangmanWord = async (word: string) => {
     const randomWord = await word;
     setHangmanWord(randomWord);
     let arrWithLetters = [];

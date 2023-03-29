@@ -1,7 +1,7 @@
 .container {
   /* display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between; */
+      flex-direction: row-reverse;
+      justify-content: space-between; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: url(/img/boardandropeandnoose3.png) no-repeat top center;
@@ -130,8 +130,8 @@
   border-radius: 20px 20px 20px 0px;
   padding: 5px 10px;
   /* position: absolute;
-    top: 260px;
-    left: 1320px; */
+      top: 260px;
+      left: 1320px; */
   opacity: 0;
   transition: opacity 2s ease-in-out;
 }
@@ -141,8 +141,8 @@
   border-radius: 20px 20px 20px 0px;
   padding: 5px 10px;
   /* position: absolute;
-    top: 380px;
-    left: 1520px; */
+      top: 380px;
+      left: 1520px; */
   opacity: 0;
   transition: opacity 2s ease-in-out;
 }
