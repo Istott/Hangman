@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import getRandomWord from "./randomWord";
 import getRandom from "./getRandom";
 
 import "./hangman.css";
 
+type AlphabetBtns = {
+  letter: string;
+  isGuessed: boolean;
+}[];
+
 export default function Hangman() {
-  const alphabetBtns = [
+  const alphabetBtns: AlphabetBtns = [
     {
       letter: "a",
       isGuessed: false,
@@ -111,18 +116,24 @@ export default function Hangman() {
       isGuessed: false,
     },
   ];
-  const [letters, setLetters] = useState(alphabetBtns);
-  const [hangmanWord, setHangmanWord] = useState("");
-  const [hangmanLetters, setHangmanLetters] = useState([]);
-  const [isCustomActive, setIsCustomActive] = useState(false);
-  const [isGuessActive, setIsGuessActive] = useState(false);
-  const [customWord, setCustomWord] = useState("");
-  const [countToDie, setCountToDie] = useState(0);
-  const [winningCount, setWinningCount] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [dialogue, setDialogue] = useState("");
-  const [health, setHealth] = useState("100%");
-  const [hangmanCharacter, setHangmanCharacter] = useState("");
+  const [letters, setLetters] = useState<AlphabetBtns>(alphabetBtns);
+  const [hangmanWord, setHangmanWord] = useState<string>("");
+  const [hangmanLetters, setHangmanLetters] = useState<
+    {
+      id: number;
+      letter: string;
+      isGuessed: boolean;
+    }[]
+  >([]);
+  const [isCustomActive, setIsCustomActive] = useState<boolean>(false);
+  const [isGuessActive, setIsGuessActive] = useState<boolean>(false);
+  const [customWord, setCustomWord] = useState<string>("");
+  const [countToDie, setCountToDie] = useState<number>(0);
+  const [winningCount, setWinningCount] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [dialogue, setDialogue] = useState<string>("");
+  const [health, setHealth] = useState<string>("100%");
+  const [hangmanCharacter, setHangmanCharacter] = useState<string>("");
 
   useEffect(() => {
     if (winningCount === hangmanWord.length) setDialogue(getRandom("escaped"));
@@ -134,7 +145,9 @@ export default function Hangman() {
     }, 3000);
   }, [letters]);
 
-  const handleHangmanWord = async (word: string) => {
+  const handleHangmanWord = async (
+    word: string | Promise<string>
+  ): Promise<void> => {
     const randomWord = await word;
     setHangmanWord(randomWord);
     let arrWithLetters = [];
@@ -155,7 +168,7 @@ export default function Hangman() {
     setHangmanCharacter(getRandom("hangmanCharacters"));
   };
 
-  const handleGuessWord = () => {
+  const handleGuessWord = (): void => {
     if (customWord === hangmanWord) {
       setWinningCount(hangmanWord.length);
     } else {
@@ -166,7 +179,7 @@ export default function Hangman() {
     setCustomWord("");
   };
 
-  const calcWidth = () => {
+  const calcWidth = (): string => {
     if (countToDie === 5) return "0%";
     const num = Number(health.slice(0, -1));
     const secretSauce = 100 / 6;
@@ -174,7 +187,7 @@ export default function Hangman() {
     return str + "%";
   };
 
-  const handleGuessLetter = (letter) => {
+  const handleGuessLetter = (letter: string): void => {
     const newLetterArr = letters.map((ltr) => {
       return ltr.letter === letter || ltr.isGuessed === true
         ? { letter: ltr.letter, isGuessed: true }
@@ -190,7 +203,7 @@ export default function Hangman() {
           ? { id: hangmanLtr.id, letter: hangmanLtr.letter, isGuessed: true }
           : { id: hangmanLtr.id, letter: hangmanLtr.letter, isGuessed: false };
       });
-      setWinningCount((count) => count + wordArr);
+      setWinningCount((count) => (count ? count + wordArr : null));
       setHangmanLetters(updatedHangmanBools);
       setDialogue(getRandom("rightGuess"));
     } else {
@@ -234,18 +247,14 @@ export default function Hangman() {
       </div>
       <div className="controls">
         {isCustomActive ? (
-          <form type="submit">
+          <form onSubmit={() => handleHangmanWord(customWord?.toLowerCase())}>
             <input
               type="text"
               placeholder="type custom word"
               value={customWord}
               onChange={(e) => setCustomWord(e.target.value)}
             ></input>
-            <button
-              onClick={() => handleHangmanWord(customWord?.toLowerCase())}
-            >
-              save word
-            </button>
+            <button type="submit">save word</button>
           </form>
         ) : (
           <button
@@ -331,14 +340,14 @@ export default function Hangman() {
           )}
         </div>
         {isGuessActive ? (
-          <form type="submit">
+          <form onSubmit={handleGuessWord}>
             <input
               type="text"
               placeholder="guess the word"
               value={customWord}
               onChange={(e) => setCustomWord(e.target.value)}
             ></input>
-            <button style={{ margin: "10px" }} onClick={handleGuessWord}>
+            <button style={{ margin: "10px" }} type="submit">
               submit guess
             </button>
           </form>
