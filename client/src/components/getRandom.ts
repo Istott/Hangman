@@ -150,6 +150,7 @@ const randomArray: RandomArray = {
 };
 
 const getRandom = (obj: keyof RandomArray): string => {
+  console.log(obj);
   const arr = randomArray[obj];
   return arr[Math.floor(Math.random() * arr.length)];
 };
